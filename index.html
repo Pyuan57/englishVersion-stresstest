@@ -3,7 +3,55 @@
 <head>
   <title>Stress Online Test</title>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=2.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    p {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+    form {
+      margin-left: 20px;
+      margin-right: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    input[type="radio"], input[type="checkbox"] {
+      margin-left: 20px;
+    }
+    input[type="submit"], input[type="button"] {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    input[type="submit"]:hover, input[type="button"]:hover {
+      background-color: #3e8e41;
+    }
+    #result {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
   <script type="text/javascript">
     function calculateScore() {
       // Get the user's answers
@@ -13,7 +61,7 @@
       var q2c = document.querySelector('input[name="q2c"]').checked ? -1 : 0;
       var q2d = document.querySelector('input[name="q2d"]').checked ? -1 : 0;
       var q3 = parseInt(document.querySelector('select[name="q3"]').value);
-
+      
       // Calculate the score
       var score = q1 + q2a + q2b + q2c + q2d + q3;
 
