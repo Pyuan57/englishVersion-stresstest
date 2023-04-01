@@ -32,19 +32,67 @@
       margin-left: 40px;
     }
     input[type="submit"], input[type="button"] {
-      display: block;
-      margin: 20px auto;
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+      position: relative;
+      outline: 0;
+      border: 1px solid transparent;
+      background-color: #488aec;
+      color: #ffffff;
       font-size: 16px;
-      font-weight: bold;
+      margin: 20px auto;
+      line-height: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      vertical-align: middle;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
     }
-    input[type="submit"]:hover, input[type="button"]:hover {
-      background-color: #3e8e41;
+
+    .btn span {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      transition: all .4s ease;
+    }
+
+    button svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .btn span:nth-child(2),.btn span:nth-child(3) {
+      position: absolute;
+      top: 40px;
+      color: #fff;
+    }
+
+    .btn span:nth-child(2) {
+      background-color: #488aec;
+    }
+
+    .btn span:nth-child(3) {
+      background-color: #488aec;
+    }
+
+    .btn:hover {
+      box-shadow: 0 10px 15px -3px #488aec4f, 0 4px 6px -2px #488aec17;
+    }
+
+    .btn:hover span:nth-child(2), .btn:focus span:nth-child(3) {
+      top: 0;
+    }
+
+    .btn:focus {
+      box-shadow: none;
     }
     #result {
       text-align: center;
@@ -60,15 +108,18 @@
       var q1 = parseInt(document.querySelector('input[name="q1"]:checked').value);
       var q2a = document.querySelector('input[name="q2a"]').checked ? 1 : 0;
       var q2b = document.querySelector('input[name="q2b"]').checked ? 1 : 0;
-      var q2c = document.querySelector('input[name="q2c"]').checked ? -1 : 0;
-      var q2d = document.querySelector('input[name="q2d"]').checked ? -1 : 0;
+      var q2c = document.querySelector('input[name="q2c"]').checked ? 1 : 0;
+      var q2d = document.querySelector('input[name="q2d"]').checked ? 1 : 0;
       var q3 = parseInt(document.querySelector('select[name="q3"]').value);
+
+      
       
       // Calculate the score
       var score = q1 + q2a + q2b + q2c + q2d + q3;
 
-      // Display the results
       var result = document.getElementById("result");
+      var percentage = (score / 10) * 100;
+
       if (score < 0) {
         result.innerHTML = "Your stress level is low.";
       } else if (score < 5) {
@@ -76,6 +127,8 @@
       } else {
         result.innerHTML = "Your stress level is high. You should seek help from a professional.";
       }
+
+        result.innerHTML += " (" + percentage + "%)";
     }
   </script>
 </head>
@@ -91,8 +144,8 @@
     <p>2. Which of the following statements apply to you?</p>
     <input type="checkbox" name="q2a" value="1"> I feel nervous or anxious<br>
     <input type="checkbox" name="q2b" value="1"> I have trouble sleeping<br>
-    <input type="checkbox" name="q2c" value="-1"> I have a poor appetite or overeat<br>
-    <input type="checkbox" name="q2d" value="-1"> I feel irritable or angry<br>
+    <input type="checkbox" name="q2c" value="1"> I have a poor appetite or overeat<br>
+    <input type="checkbox" name="q2d" value="1"> I feel irritable or angry<br>
     <p>3. How would you rate your overall stress level?</p>
     <select name="q3">
       <option value="0">Low</option>
@@ -101,7 +154,7 @@
       <option value="3">Very high</option>
     </select>
     <br><br>
-    <input type="button" value="Submit" onclick="calculateScore()">
+    <input type="button" value="submit" onclick="calculateScore()">
   </form>
   <p id="result"></p>
 </body>
