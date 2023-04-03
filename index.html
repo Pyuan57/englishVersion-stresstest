@@ -120,9 +120,9 @@
       var result = document.getElementById("result");
       var percentage = (score / 10) * 100;
 
-      if (score < 0) {
+      if (score <= 3) {
         result.innerHTML = "Your stress level is low.";
-      } else if (score < 5) {
+      } else if (score <= 6) {
         result.innerHTML = "Your stress level is moderate.";
       } else {
         result.innerHTML = "Your stress level is high. You should seek help from a professional.";
