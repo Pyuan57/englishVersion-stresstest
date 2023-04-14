@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: Times New Roman, sans-serif;
-      background-color: #f0f0f0;
+      font-family: Verdana, sans-serif;
+      background-color: #ffffff;
       margin: 0;
       padding: 0;
     }
@@ -15,17 +15,29 @@
       text-align: center;
       margin-top: 20px;
       margin-bottom: 20px;
+      font-size:35px;
     }
-    p {
-      margin-left: 20px;
+    p1 {
+      margin-left: 51px;
+      font-size:18px;
+      color: #000000;
+    }
+    p {  
+      margin-left: 30px;
       margin-right: 20px;
+      font-style: Verdana;
+      font-size: 16px;
+      color: #000000;
     }
     form {
-      margin-left: 20px;
-      margin-right: 20px;
+      font-size: 15px;
+      font-style: Verdana;
+      margin-top: 10px;
+      margin-left: 50px;
+      margin-right: 50px;
       padding: 20px;
-      background-color: #fff;
-      border: 1px solid #ccc;
+      background-color: #dfffde;
+      border: 5px solid #ccc;
       border-radius: 5px;
     }
     input[type="radio"], input[type="checkbox"] {
@@ -53,53 +65,12 @@
       overflow: hidden;
       box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
     }
-
-    .btn span {
-      height: 100%;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      transition: all .4s ease;
-    }
-
-    button svg {
-      width: 1.25rem;
-      height: 1.25rem;
-    }
-
-    .btn span:nth-child(2),.btn span:nth-child(3) {
-      position: absolute;
-      top: 40px;
-      color: #fff;
-    }
-
-    .btn span:nth-child(2) {
-      background-color: #488aec;
-    }
-
-    .btn span:nth-child(3) {
-      background-color: #488aec;
-    }
-
-    .btn:hover {
-      box-shadow: 0 10px 15px -3px #488aec4f, 0 4px 6px -2px #488aec17;
-    }
-
-    .btn:hover span:nth-child(2), .btn:focus span:nth-child(3) {
-      top: 0;
-    }
-
-    .btn:focus {
-      box-shadow: none;
-    }
     #result {
       text-align: center;
       margin-top: 50px;
       font-weight: bold;
       font-size: 36px;
-      color: #ff0000;
+      color: #24da3f;
     }
   </style>
   <script type="text/javascript">
@@ -110,12 +81,11 @@
       var q2b = document.querySelector('input[name="q2b"]').checked ? 1 : 0;
       var q2c = document.querySelector('input[name="q2c"]').checked ? 1 : 0;
       var q2d = document.querySelector('input[name="q2d"]').checked ? 1 : 0;
-      var q3 = parseInt(document.querySelector('select[name="q3"]').value);
-
-      
+      var q3 = parseInt(document.querySelector('input[name="q3"]:checked').value);
+      var q4 = parseInt(document.querySelector('input[name="q4"]:checked').value);
       
       // Calculate the score
-      var score = q1 + q2a + q2b + q2c + q2d + q3;
+      var score = q1 + q2a + q2b + q2c + q2d + q3 + q4;
 
       var result = document.getElementById("result");
       var percentage = (score / 10) * 100;
@@ -127,18 +97,17 @@
       } else {
         result.innerHTML = "Your stress level is high. You should seek help from a professional.";
       }
-
         result.innerHTML += " (" + percentage + "%)";
     }
   </script>
 </head>
 <body>
   <h1>Stress Online Test</h1>
-  <p>Please answer the following questions to determine your stress level:</p>
+  <p1>Please answer the following questions to determine your stress level:</p1>
   <form>
     <p>1. How often do you feel overwhelmed or stressed?</p>
     <input type="radio" name="q1" value="0"> Never<br>
-    <input type="radio" name="q1" value="1"> Occasionally<br>
+    <input type="radio" name="q1" value="1"> Rarely<br>
     <input type="radio" name="q1" value="2"> Frequently<br>
     <input type="radio" name="q1" value="3"> Almost always<br>
     <p>2. Which of the following statements apply to you?</p>
@@ -146,12 +115,15 @@
     <input type="checkbox" name="q2b" value="1"> I have trouble sleeping<br>
     <input type="checkbox" name="q2c" value="1"> I have a poor appetite or overeat<br>
     <input type="checkbox" name="q2d" value="1"> I feel irritable or angry<br>
-    <p>3. How would you rate your overall stress level?</p>
-    <select name="q3">
-      <option value="0">Low</option>
-      <option value="1">Moderate</option>
-      <option value="2">High</option>
-      <option value="3">Very high</option>
+    <p>3. Do you ever have trouble sleeping?</p>
+    <input type="radio" name="q3" value="0"> Never<br>
+    <input type="radio" name="q3" value="1"> Rarely<br>
+    <input type="radio" name="q3" value="2"> Sometimes I'll have trouble falling asleep, staying asleep, or getting quality sleep.<br>
+    <input type="radio" name="q3" value="3"> Yes, I pretty often have trouble with sleep quality, or with falling and staying asleep.<br>
+    <p>4. Do you have a supportive social network, and take time for relationships in your life?</p>
+    <input type="radio" name="q4" value="0"> Yes. My friends and family help a lot with stress<br>
+    <input type="radio" name="q4" value="1"> I have a few close relationships and can talk to people if something's really bothering me, but don't have as much time for relationships as I'd like.<br>
+    <input type="radio" name="q4" value="2"> No, I don't have time to devote to the people I could be close with.<br>
     </select>
     <br><br>
     <input type="button" value="submit" onclick="calculateScore()">
