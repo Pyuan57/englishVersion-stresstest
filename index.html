@@ -1,49 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Stress Online Test</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Verdana, sans-serif;
-      background-color: #ffffff;
-      margin: 0;
-      padding: 0;
-    }
-    h1 {
-      text-align: center;
-      margin-top: 20px;
-      margin-bottom: 20px;
-      font-size:35px;
-    }
-    p1 {
-      margin-left: 51px;
-      font-size:18px;
-      color: #000000;
-    }
-    p {  
-      margin-left: 30px;
-      margin-right: 20px;
-      font-style: Verdana;
-      font-size: 16px;
-      color: #000000;
-    }
-    form {
-      font-size: 15px;
-      font-style: Verdana;
-      margin-top: 10px;
-      margin-left: 50px;
-      margin-right: 50px;
-      padding: 20px;
-      background-color: #dfffde;
-      border: 5px solid #ccc;
-      border-radius: 5px;
-    }
+
     input[type="radio"], input[type="checkbox"] {
       margin-left: 40px;
     }
-    input[type="submit"], input[type="button"] {
+    input[type="submit"],
+    input[type="button"] {
       position: relative;
       outline: 0;
       border: 1px solid transparent;
@@ -67,63 +27,134 @@
     }
     #result {
       text-align: center;
-      margin-top: 50px;
+      margin-top: 30px;
       font-weight: bold;
-      font-size: 36px;
-      color: #24da3f;
+      font-size: 32px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
     }
   </style>
   <script type="text/javascript">
     function calculateScore() {
       // Get the user's answers
       var q1 = parseInt(document.querySelector('input[name="q1"]:checked').value);
-      var q2a = document.querySelector('input[name="q2a"]').checked ? 1 : 0;
-      var q2b = document.querySelector('input[name="q2b"]').checked ? 1 : 0;
-      var q2c = document.querySelector('input[name="q2c"]').checked ? 1 : 0;
-      var q2d = document.querySelector('input[name="q2d"]').checked ? 1 : 0;
+      var q2 = parseInt(document.querySelector('input[name="q2"]:checked').value);
       var q3 = parseInt(document.querySelector('input[name="q3"]:checked').value);
       var q4 = parseInt(document.querySelector('input[name="q4"]:checked').value);
-      
+      var q5 = parseInt(document.querySelector('input[name="q5"]:checked').value);
+      var q6 = parseInt(document.querySelector('input[name="q6"]:checked').value);
+      var q7 = parseInt(document.querySelector('input[name="q7"]:checked').value);
+      var q8 = parseInt(document.querySelector('input[name="q8"]:checked').value);
+      var q9 = parseInt(document.querySelector('input[name="q9"]:checked').value);
+      var q10 = parseInt(document.querySelector('input[name="q10"]:checked').value);
+      var q11 = parseInt(document.querySelector('input[name="q11"]:checked').value);
+      var q12 = parseInt(document.querySelector('input[name="q12"]:checked').value);
+      var q13 = parseInt(document.querySelector('input[name="q13"]:checked').value);
+
       // Calculate the score
-      var score = q1 + q2a + q2b + q2c + q2d + q3 + q4;
+      var score = q1 + q2+ q3 + q4 + q5 + q6 + q7 + q8 + q9 + q10 + q11 + q11 + q12 + q13;
 
       var result = document.getElementById("result");
-      var percentage = (score / 10) * 100;
+      var percentage = (score / 40) * 100;
 
-      if (score <= 3) {
-        result.innerHTML = "Your stress level is low.";
-      } else if (score <= 6) {
-        result.innerHTML = "Your stress level is moderate.";
+      if (score <= 14) {
+        result.innerHTML = "Your stress level is low. You are cool, calm and collected. <br>You really have a handle on coping with stress. If you begin to see changes in your life, <br>you may try maintain this level by discovering sources of stress that you can eliminate.";
+        result.style.color= "#00ff00";
+        result.style.backgroundColor = "#b7ffbf";
+      } else if (score <= 26) {
+        result.innerHTML = "Your stress level is moderate. You definitely have some stress going on. <br>You probably have enough coping skills for stress as well. Find ways to relieve your stress by discovering sources of stress <br>that you can eliminate and also by including effective strategies like physical activity, breathing exercises or music.";
+        result.style.color= "blue";
+        result.style.backgroundColor = "#e5f7fe";
       } else {
-        result.innerHTML = "Your stress level is high. You should seek help from a professional.";
+        result.innerHTML = "Your stress level is high. There is way too much stress going on in your life. <br>Take steps to reduce and manage your stress now. Find ways to relieve your stress <br>by discovering sources of stress that you can eliminate and also by including effective strategies <br>like physical activity, breathing exercises or music. You should seek help from a professional.";
+        result.style.color= "red";
+        result.style.backgroundColor = "#ffe5e5";
       }
-        result.innerHTML += " (" + percentage + "%)";
-    }
+      result.innerHTML = "<span style='font-size: 30px; text-shadow: 1px 1px 2px rgb(0,0,0);'>Your total stress score is " + score + "/40. (" + percentage + "%)</span><br><span style='font-size: 20px; color: black;'>" + result.innerHTML + "</span>";
+}
   </script>
 </head>
 <body>
-  <h1>Stress Online Test</h1>
+  <h1>Mind Matters Stress Online Test</h1>
   <p1>Please answer the following questions to determine your stress level:</p1>
   <form>
-    <p>1. How often do you feel overwhelmed or stressed?</p>
+    <p>1. How often do you feel overwhelmed or unable to cope with your daily responsibilities?</p>
     <input type="radio" name="q1" value="0"> Never<br>
     <input type="radio" name="q1" value="1"> Rarely<br>
-    <input type="radio" name="q1" value="2"> Frequently<br>
-    <input type="radio" name="q1" value="3"> Almost always<br>
-    <p>2. Which of the following statements apply to you?</p>
-    <input type="checkbox" name="q2a" value="1"> I feel nervous or anxious<br>
-    <input type="checkbox" name="q2b" value="1"> I have trouble sleeping<br>
-    <input type="checkbox" name="q2c" value="1"> I have a poor appetite or overeat<br>
-    <input type="checkbox" name="q2d" value="1"> I feel irritable or angry<br>
-    <p>3. Do you ever have trouble sleeping?</p>
+    <input type="radio" name="q1" value="2"> A few times a week<br>
+    <input type="radio" name="q1" value="3"> Almost everyday<br>
+
+    <p>2. How often do you experience physical symptoms of stress such as headaches or muscle tension?</p>
+    <input type="radio" name="q2" value="0"> Never<br>
+    <input type="radio" name="q2" value="1"> Rarely<br>
+    <input type="radio" name="q2" value="2"> A few times a week<br>
+    <input type="radio" name="q2" value="3"> Almost everyday<br>
+
+    <p>3. How often do you experience difficulty sleeping?</p>
     <input type="radio" name="q3" value="0"> Never<br>
     <input type="radio" name="q3" value="1"> Rarely<br>
-    <input type="radio" name="q3" value="2"> Sometimes I'll have trouble falling asleep, staying asleep, or getting quality sleep.<br>
-    <input type="radio" name="q3" value="3"> Yes, I pretty often have trouble with sleep quality, or with falling and staying asleep.<br>
-    <p>4. Do you have a supportive social network, and take time for relationships in your life?</p>
-    <input type="radio" name="q4" value="0"> Yes. My friends and family help a lot with stress<br>
-    <input type="radio" name="q4" value="1"> I have a few close relationships and can talk to people if something's really bothering me, but don't have as much time for relationships as I'd like.<br>
-    <input type="radio" name="q4" value="2"> No, I don't have time to devote to the people I could be close with.<br>
+    <input type="radio" name="q3" value="2"> A few times a week<br>
+    <input type="radio" name="q3" value="3"> Almost everyday<br>
+
+    <p>4. How often do you experience feelings of hopelessness or despair?</p>
+    <input type="radio" name="q4" value="0"> Never<br>
+    <input type="radio" name="q4" value="1"> Rarely<br>
+    <input type="radio" name="q4" value="2"> A few times a week<br>
+    <input type="radio" name="q4" value="3"> Almost everyday<br>
+
+    <p>5. How often do you feel disconnected from others like family and friends?</p>
+    <input type="radio" name="q5" value="0"> Never<br>
+    <input type="radio" name="q5" value="1"> Rarely<br>
+    <input type="radio" name="q5" value="2"> A few times a week<br>
+    <input type="radio" name="q5" value="3"> Almost everyday<br>
+
+    <p>6. How often do you turn to unhealthy habits such as drinking or smoking to cope with stress?</p>
+    <input type="radio" name="q6" value="0"> Never<br>
+    <input type="radio" name="q6" value="1"> Rarely<br>
+    <input type="radio" name="q6" value="2"> A few times a week<br>
+    <input type="radio" name="q6" value="3"> Almost everyday<br>
+
+    <p>7. During work hours, do you have a hard time staying focused and concentrating on the task-at-hand?</p>
+    <input type="radio" name="q7" value="0"> Never<br>
+    <input type="radio" name="q7" value="1"> Rarely<br>
+    <input type="radio" name="q7" value="2"> A few times a week<br>
+    <input type="radio" name="q7" value="3"> Almost every times<br>
+
+    <p>8. How often do you feel anxious or worried about things beyond your control?</p>
+    <input type="radio" name="q8" value="0"> Never<br>
+    <input type="radio" name="q8" value="1"> Rarely<br>
+    <input type="radio" name="q8" value="2"> A few times a week<br>
+    <input type="radio" name="q8" value="3"> Almost everyday<br>
+
+    <p>9. How often do you experience difficulty concentrating or making decisions?</p>
+    <input type="radio" name="q9" value="0"> Never<br>
+    <input type="radio" name="q9" value="1"> Rarely<br>
+    <input type="radio" name="q9" value="2"> A few times<br>
+    <input type="radio" name="q9" value="3"> Almost every times<br>
+
+    <p>10. How often do you experience tension or conflict with coworkers or family members?</p>
+    <input type="radio" name="q10" value="0"> Never<br>
+    <input type="radio" name="q10" value="1"> Rarely<br>
+    <input type="radio" name="q10" value="2"> A few times a week<br>
+    <input type="radio" name="q10" value="3"> Almost everyday<br>
+
+    <p>11. How often do you feel like your stress levels are impacting your physical health?</p>
+    <input type="radio" name="q11" value="0"> Never<br>
+    <input type="radio" name="q11" value="1"> Rarely<br>
+    <input type="radio" name="q11" value="2"> A few times a week<br>
+    <input type="radio" name="q11" value="3"> Almost everyday<br>
+
+    <p>12. How often do you feel like you need a break from your daily routine in order to reduce stress?</p>
+    <input type="radio" name="q12" value="0"> Never<br>
+    <input type="radio" name="q12" value="1"> Rarely<br>
+    <input type="radio" name="q12" value="2"> A few times a week<br>
+    <input type="radio" name="q12" value="3"> Almost everyday<br> 
+
+    <p>13. Have you ever thought about suicide?</p>
+    <input type="radio" name="q13" value="0"> No<br>
+    <input type="radio" name="q13" value="1"> Yes<br>
+
     </select>
     <br><br>
     <input type="button" value="submit" onclick="calculateScore()">
