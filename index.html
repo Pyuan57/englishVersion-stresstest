@@ -5,67 +5,154 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    .neon {
+      color: #fff;
+      text-shadow:
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 40px #0ff,
+        0 0 80px #0ff,
+        0 0 90px #0ff,
+        0 0 100px #0ff,
+        0 0 150px #0ff;
+    }
+    /* general styling */
+    :root {
+      font-size: calc(1vw + 1vh + 1.5vmin);
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    .container {
+      margin: 0 auto;
+    }
+    .container2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     body {
       font-family: Verdana;
-      background-color: #ffffff;
+      text-align: center;
+      background-image: url('image1.gif');
+      background-size: cover;
+      background-repeat: no-repeat;
       margin: 0;
       padding: 0;
+      opacity: 0; /* set initial opacity to 0 */
+      animation: fadeIn 1s ease-in-out forwards; /* specify the animation */
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0; /* animate from 0 opacity */
+      }
+      to {
+        opacity: 1; /* animate to 1 opacity */
+      }
     }
     h1 {
+      font-weight: 350;
       text-align: center;
-      margin-top: 20px;
-      margin-bottom: 20px;
-      font-size:35px;
+      text-transform: uppercase;
     }
-    p1 {
-      margin-left: 51px;
-      font-size:18px;
-      color: #000000;
+    h {
+      display: block;
+      font-size: 18px;
+      color: #ffffff;
+      margin-top: 100px;
+      margin-bottom: 20px; /* add some space below the heading */
     }
-    p {  
-      margin-left: 30px;
+
+    p {
+      margin-left: 20px;
       margin-right: 20px;
       font-style: Verdana;
       font-size: 16px;
       color: #000000;
     }
+
     form {
+      display: inline-block;
       font-size: 15px;
       font-style: Verdana;
-      margin-top: 10px;
-      margin-left: 50px;
-      margin-right: 50px;
+      margin: 0 auto;
       padding: 20px;
-      background-color: #dfffde;
+      background-color: #ffffff;
       border: 5px solid #ccc;
       border-radius: 5px;
     }
+
     input[type="radio"], input[type="checkbox"] {
-      margin-left: 40px;
+      padding: 7px;
+      align-items: left;
     }
-    input[type="submit"],
-    input[type="button"] {
-      position: relative;
-      outline: 0;
-      border: 1px solid transparent;
-      background-color: #488aec;
-      color: #ffffff;
-      font-size: 16px;
-      margin: 20px auto;
-      line-height: 1rem;
-      font-weight: 700;
+
+    .next-btn {
+      padding: 10px 20px; /* add some padding to the button */
+      margin-top: 20px;
+      background-color: #4CAF50; /* set the background color */
+      color: #ffffff; /* set the text color */
+      border: none; /* remove the border */
+      border-radius: 4px; /* add some border radius */
+      cursor: pointer; /* add a pointer cursor on hover */
+    }
+
+    .next-btn:hover {
+      background-color: #3e8e41; /* change the background color on hover */
+    }
+
+    .submit-button{
+      text-align: center;
       text-transform: uppercase;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.5rem;
       cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      vertical-align: middle;
+      font-size: 20px;
+      letter-spacing: 4px;
+      position: relative;
+      background-color: #16a085;
+      border: none;
+      color: #fff;
+      padding: 20px;
+      width: 200px;
+      text-align: center;
+      transition-duration: 0.4s;
       overflow: hidden;
-      box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
+      box-shadow: 0 5px 15px #193047;
+      border-radius: 4px;
+      justify-content: center;
     }
+
+    .submit-button:hover {
+      background: #fff;
+      box-shadow: 0px 2px 10px 5px #1abc9c;
+      color: #000;
+    }
+
+    .submit-button:after {
+      content: "";
+      background: #1abc9c;
+      display: block;
+      position: absolute;
+      padding-top: 300%;
+      padding-left: 350%;
+      margin-left: -20px !important;
+      margin-top: -120%;
+      opacity: 0;
+      transition: all 0.8s
+    }
+
+    .submit-button:active:after {
+      padding: 0;
+      margin: 0;
+      opacity: 1;
+      transition: 0s
+    }
+
+    .submit-button:focus { outline:0; }
+
     #result {
       text-align: center;
       margin-top: 30px;
@@ -77,6 +164,26 @@
     }
   </style>
   <script type="text/javascript">
+    
+    var currentQuestion = 1;
+    
+    function nextQuestion() {
+      // Hide the current question
+      var current = document.getElementById("q" + currentQuestion);
+      current.style.display = "none";
+      
+      // Show the next question
+      currentQuestion++;
+      var next = document.getElementById("q" + currentQuestion);
+      next.style.display = "block";
+      
+      // If this is the last question, show the score button
+      if (currentQuestion == 14) {
+        var button = document.getElementById("button");
+        button.style.display = "block";
+      }
+    }
+    
     function calculateScore() {
       // Get the user's answers
       var q1 = parseInt(document.querySelector('input[name="q1"]:checked').value);
@@ -94,12 +201,13 @@
       var q13 = parseInt(document.querySelector('input[name="q13"]:checked').value);
 
       // Calculate the score
-      var score = q1 + q2+ q3 + q4 + q5 + q6 + q7 + q8 + q9 + q10 + q11 + q11 + q12 + q13;
-
+      var score = q1 + q2+ q3 + q4 + q5 + q6 + q7 + q8 + q9 + q10 + q11 + q12 + q13;
+      
+      // Display the result
       var result = document.getElementById("result");
-      var percentage = (score / 40) * 100;
+      var percentage = ((score / 37) * 100).toFixed(2);
 
-      if (score <= 14) {
+      if (score <= 13) {
         result.innerHTML = "Your stress level is low. You are cool, calm and collected. <br>You really have a handle on coping with stress. If you begin to see changes in your life, <br>you may try maintain this level by discovering sources of stress that you can eliminate.";
         result.style.color= "#00ff00";
         result.style.backgroundColor = "#b7ffbf";
@@ -112,95 +220,147 @@
         result.style.color= "red";
         result.style.backgroundColor = "#ffe5e5";
       }
-      result.innerHTML = "<span style='font-size: 30px; text-shadow: 1px 1px 2px rgb(0,0,0);'>Your total stress score is " + score + "/40. (" + percentage + "%)</span><br><span style='font-size: 20px; color: black;'>" + result.innerHTML + "</span>";
-}
+      result.innerHTML = "<span style='font-size: 30px; text-shadow: 1px 1px 2px rgb(0,0,0);'>Your total stress score is " + score + "/37. (" + percentage + "%)</span><br><span style='font-size: 20px; color: black;'>" + result.innerHTML + "</span>";
+
+      // Hide the questions and score button
+      for (var i = 1; i <= 13; i++) {
+        var question = document.getElementById("q" + i);
+        question.style.display = "none";
+      }
+        var button = document.getElementById("button");
+        button.style.display = "none";
+    }
   </script>
 </head>
-<body>
-  <h1>Mind Matters Stress Online Test</h1>
-  <p1>Please answer the following questions to determine your stress level:</p1>
+<div class="container">
+  <h1 class="neon">Mind Matters<br>Stress Online Test</h1>
+</div>
+  <h>Please answer the following questions to determine your stress level:</h>
   <form>
-    <p>1. How often do you feel overwhelmed or unable to cope with your daily responsibilities?</p>
-    <input type="radio" name="q1" value="0"> Never<br>
-    <input type="radio" name="q1" value="1"> Rarely<br>
-    <input type="radio" name="q1" value="2"> A few times a week<br>
-    <input type="radio" name="q1" value="3"> Almost everyday<br>
+    <div id="q1" >
+      <p>1. How often do you feel overwhelmed or unable to cope with your daily responsibilities?</p>
+      <input type="radio" type="checkbox" name="q1" value="0"> Never<br>
+      <input type="radio" type="checkbox" name="q1" value="1"> Rarely<br>
+      <input type="radio" type="checkbox" name="q1" value="2"> A few times a week<br>
+      <input type="radio" type="checkbox" name="q1" value="3"> Almost everyday<br>
+      <button type="button" class="next-btn" onclick="nextQuestion();">Next</button>
+    </div>
 
-    <p>2. How often do you experience physical symptoms of stress such as headaches or muscle tension?</p>
-    <input type="radio" name="q2" value="0"> Never<br>
-    <input type="radio" name="q2" value="1"> Rarely<br>
-    <input type="radio" name="q2" value="2"> A few times a week<br>
-    <input type="radio" name="q2" value="3"> Almost everyday<br>
+    <div id="q2" style="display: none;">
+      <p>2. How often do you experience physical symptoms of stress such as headaches or muscle tension?</p>
+      <input type="radio" name="q2" value="0"> Never<br>
+      <input type="radio" name="q2" value="1"> Rarely<br>
+      <input type="radio" name="q2" value="2"> A few times a week<br>
+      <input type="radio" name="q2" value="3"> Almost everyday<br>
+      <button type="button" class="next-btn" onclick="nextQuestion();">Next</button>
+    </div>
+    
+    <div id="q3" style="display: none;">
+      <p>3. How often do you feel anxious or worried?</p>
+      <input type="radio" name="q3" value="0"> Never<br>
+      <input type="radio" name="q3" value="1"> Rarely<br>
+      <input type="radio" name="q3" value="2"> A few times a week<br>
+      <input type="radio" name="q3" value="3"> Almost everyday<br>
+      <button type="button" class="next-btn" onclick="nextQuestion();">Next</button>
+    </div>
 
-    <p>3. How often do you experience difficulty sleeping?</p>
-    <input type="radio" name="q3" value="0"> Never<br>
-    <input type="radio" name="q3" value="1"> Rarely<br>
-    <input type="radio" name="q3" value="2"> A few times a week<br>
-    <input type="radio" name="q3" value="3"> Almost everyday<br>
-
+    <div id="q4" style="display: none;">
     <p>4. How often do you experience feelings of hopelessness or despair?</p>
     <input type="radio" name="q4" value="0"> Never<br>
     <input type="radio" name="q4" value="1"> Rarely<br>
     <input type="radio" name="q4" value="2"> A few times a week<br>
     <input type="radio" name="q4" value="3"> Almost everyday<br>
+    <button type="button" class="next-btn" onclick="nextQuestion();">Next</button>
+  </div>
 
+    <div id="q5" style="display: none;">
     <p>5. How often do you feel disconnected from others like family and friends?</p>
     <input type="radio" name="q5" value="0"> Never<br>
     <input type="radio" name="q5" value="1"> Rarely<br>
     <input type="radio" name="q5" value="2"> A few times a week<br>
     <input type="radio" name="q5" value="3"> Almost everyday<br>
+    <button type="button" class="next-btn" onclick="nextQuestion();">Next</button>
+</div>
 
+    <div id="q6" style="display: none;">
     <p>6. How often do you turn to unhealthy habits such as drinking or smoking to cope with stress?</p>
     <input type="radio" name="q6" value="0"> Never<br>
     <input type="radio" name="q6" value="1"> Rarely<br>
     <input type="radio" name="q6" value="2"> A few times a week<br>
     <input type="radio" name="q6" value="3"> Almost everyday<br>
+    <button type="button" class="next-btn" onclick="nextQuestion();">Next</button>
+  </div>
 
+    <div id="q7" style="display: none;">
     <p>7. During work hours, do you have a hard time staying focused and concentrating on the task-at-hand?</p>
     <input type="radio" name="q7" value="0"> Never<br>
     <input type="radio" name="q7" value="1"> Rarely<br>
     <input type="radio" name="q7" value="2"> A few times a week<br>
     <input type="radio" name="q7" value="3"> Almost every times<br>
+    <button type="button" class="next-btn" onclick="nextQuestion();">Next</button>
+</div>
 
+    <div id="q8" style="display: none;">
     <p>8. How often do you feel anxious or worried about things beyond your control?</p>
     <input type="radio" name="q8" value="0"> Never<br>
     <input type="radio" name="q8" value="1"> Rarely<br>
     <input type="radio" name="q8" value="2"> A few times a week<br>
     <input type="radio" name="q8" value="3"> Almost everyday<br>
+    <button type="button" class="next-btn" onclick="nextQuestion();">Next</button>
+  </div>
 
+    <div id="q9" style="display: none;">
     <p>9. How often do you experience difficulty concentrating or making decisions?</p>
     <input type="radio" name="q9" value="0"> Never<br>
     <input type="radio" name="q9" value="1"> Rarely<br>
     <input type="radio" name="q9" value="2"> A few times<br>
     <input type="radio" name="q9" value="3"> Almost every times<br>
+    <button type="button" class="next-btn" onclick="nextQuestion();">Next</button>
+</div>
 
+    <div id="q10" style="display: none;">
     <p>10. How often do you experience tension or conflict with coworkers or family members?</p>
     <input type="radio" name="q10" value="0"> Never<br>
     <input type="radio" name="q10" value="1"> Rarely<br>
     <input type="radio" name="q10" value="2"> A few times a week<br>
     <input type="radio" name="q10" value="3"> Almost everyday<br>
+    <button type="button" class="next-btn" onclick="nextQuestion();">Next</button>
+  </div>
 
+    <div id="q11" style="display: none;">
     <p>11. How often do you feel like your stress levels are impacting your physical health?</p>
     <input type="radio" name="q11" value="0"> Never<br>
     <input type="radio" name="q11" value="1"> Rarely<br>
     <input type="radio" name="q11" value="2"> A few times a week<br>
     <input type="radio" name="q11" value="3"> Almost everyday<br>
+    <button type="button" class="next-btn" onclick="nextQuestion();">Next</button>
+</div>
 
+    <div id="q12" style="display: none;">
     <p>12. How often do you feel like you need a break from your daily routine in order to reduce stress?</p>
     <input type="radio" name="q12" value="0"> Never<br>
     <input type="radio" name="q12" value="1"> Rarely<br>
     <input type="radio" name="q12" value="2"> A few times a week<br>
     <input type="radio" name="q12" value="3"> Almost everyday<br> 
+    <button type="button" class="next-btn" onclick="nextQuestion();">Next</button>
+  </div>
 
+    <div id="q13" style="display: none;">
     <p>13. Have you ever thought about suicide?</p>
     <input type="radio" name="q13" value="0"> No<br>
     <input type="radio" name="q13" value="1"> Yes<br>
+    <button type="button" class="next-btn" onclick="nextQuestion();">Next</button>
+  </div>
 
-    </select>
-    <br><br>
-    <input type="button" value="submit" onclick="calculateScore()">
+    <div id="q14" style="display: none;">
+      <h2>Thank you for completing the test!</h2>
+      <p>Click the button below to see your results:</p>
+      <div class="container2">
+        <button id="button" type="button" onclick="calculateScore();" class="submit-button" style="display: none;">Submit</button>
+      </div>
+    </div>
+
   </form>
-  <p id="result"></p>
+  <div id="result"></div>
 </body>
 </html>
-   
