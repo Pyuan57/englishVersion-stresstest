@@ -38,7 +38,7 @@
     body {
       font-family: Verdana;
       text-align: center;
-      background-image: url('image1.gif');
+      background-image: url('imagebg3.gif');
       background-size: cover;
       background-repeat: no-repeat;
       margin: 0;
@@ -71,12 +71,12 @@
     p {
       margin-left: 20px;
       margin-right: 20px;
+      text-align:center;
       font-style: Verdana;
       font-size: 18px;
       font-weight: bold;
       letter-spacing: 1px;
-      color: rgb(0, 255, 255);
-      text-shadow:2px 2px 3px #000000;
+      color: black;
     }
 
     form {
@@ -84,12 +84,26 @@
       width: 1200px;
       font-size: 17px;
       text-align: center;
-      text-shadow: 2px 2px 3px #000000;
+      text-shadow: 2px 2px 3px #ffffff;
       padding: 20px;
-      color:#ffffff;
+      color:black;
       background-color: rgba(255, 255, 255, 0.5); /* semi-transparent white background */
-      border: 5px solid #6a6363;
-      border-radius: 5px;
+      border: 4px solid #3b3b3b;
+      border-radius: 10px;
+      backdrop-filter: blur(10px); /* apply a blur filter to create the glassmorphism effect */
+      /* fallback background color for older browsers */
+    }
+
+    .introduction {
+      display: inline-block;
+      width: 1200px;
+      font-size: 16px;
+      text-align: center;
+      padding: 20px;
+      color:black;
+      background-color: rgba(255, 255, 255, 0.5); /* semi-transparent white background */
+      border: 4px solid #3b3b3b;
+      border-radius: 10px;
       backdrop-filter: blur(10px); /* apply a blur filter to create the glassmorphism effect */
       /* fallback background color for older browsers */
     }
@@ -204,6 +218,11 @@
     }
   </style>
   <script type="text/javascript">
+
+function startTest() {
+  document.querySelector('.introduction').style.display = 'none';
+  document.querySelector('#questions-form').style.display = 'inline-block';
+}
     
     var currentQuestion = 1;
 
@@ -254,6 +273,23 @@
     }
     
     function calculateScore() {
+      // Check if all questions are answered
+      var allQuestionsAnswered = true;
+      for (var i = 1; i <= 13; i++) {
+        var question = document.getElementById("q" + i);
+        var answer = document.querySelector('input[name="q' + i + '"]:checked');
+        if (!answer) {
+          allQuestionsAnswered = false;
+          question.style.backgroundColor = "pink";
+        } else {
+          question.style.backgroundColor = "white";
+        }
+      }
+
+      if (!allQuestionsAnswered) {
+        alert("You have missed answering one or more questions. Please refresh the page and answer all the questions!!!");
+        return;
+      }
       // Get the user's answers
       var q1 = parseInt(document.querySelector('input[name="q1"]:checked').value);
       var q2 = parseInt(document.querySelector('input[name="q2"]:checked').value);
@@ -269,27 +305,28 @@
       var q12 = parseInt(document.querySelector('input[name="q12"]:checked').value);
       var q13 = parseInt(document.querySelector('input[name="q13"]:checked').value);
 
+
       // Calculate the score
       var score = q1 + q2+ q3 + q4 + q5 + q6 + q7 + q8 + q9 + q10 + q11 + q12 + q13;
       
       // Display the result
       var result = document.getElementById("result");
-      var percentage = ((score / 37) * 100).toFixed(2);
+      var percentage = ((score / 40) * 100).toFixed(2);
 
-      if (score <= 15) {
-        result.innerHTML = "Your stress level is low. You are cool, calm and collected. <br>You really have a handle on coping with stress. If you begin to see changes in your life, <br>you may try maintain this level by discovering sources of stress that you can eliminate.";
+      if (score <= 14) {
+        result.innerHTML = "Your stress level is low. You are cool, calm and collected. <br>You really have a handle on coping with stress. If you begin to see changes in your life, <br>you may try maintain this level by discovering sources of stress that you can eliminate. <br><br> This quiz is NOT a diagnostic tool. <br>Mental health disorders can only be diagnosed by qualified mental health professionals.";
         result.style.color= "#00ff00";
         result.style.backgroundColor = "#b7ffbf";
       } else if (score <= 25) {
-        result.innerHTML = "Your stress level is moderate. You definitely have some stress going on. <br>You probably have enough coping skills for stress as well. Find ways to relieve your stress by discovering sources of stress <br>that you can eliminate and also by including effective strategies like physical activity, breathing exercises or music.";
+        result.innerHTML = "Your stress level is moderate. You definitely have some stress going on. <br>You probably have enough coping skills for stress as well. Find ways to relieve your stress by discovering sources of stress <br>that you can eliminate and also by including effective strategies like physical activity, breathing exercises or music.<br><br> This quiz is NOT a diagnostic tool. <br>Mental health disorders can only be diagnosed by qualified mental health professionals.";
         result.style.color= "blue";
         result.style.backgroundColor = "#e5f7fe";
       } else {
-        result.innerHTML = "Your stress level is high. There is way too much stress going on in your life. <br>Take steps to reduce and manage your stress now. Find ways to relieve your stress <br>by discovering sources of stress that you can eliminate and also by including effective strategies <br>like physical activity, breathing exercises or music. You should seek help from a professional.";
+        result.innerHTML = "Your stress level is high. There is way too much stress going on in your life. <br>Take steps to reduce and manage your stress now. Find ways to relieve your stress by discovering sources of stress <br>that you can eliminate and also by including effective strategies like physical activity, breathing exercises or music. <br>If you think you may be suffering from stress, anxiety, or any other medical health condition, Mind Matters strongly <br>recommends that you seek help from a mental health professional in order to receive a proper diagnosis and support.<br><br> This quiz is NOT a diagnostic tool. <br>Mental health disorders can only be diagnosed by qualified mental health professionals.";
         result.style.color= "red";
         result.style.backgroundColor = "#ffe5e5";
       }
-      result.innerHTML = "<span style='font-size: 30px; text-shadow: 1px 1px 2px rgb(0,0,0);'>Your total stress score is " + score + "/37. (" + percentage + "%)</span><br><span style='font-size: 20px; color: black;'>" + result.innerHTML + "</span>";
+      result.innerHTML = "<span style='font-size: 30px; text-shadow: 1px 1px 2px rgb(0,0,0);'>Your total stress score is " + score + "/40. (" + percentage + "%)</span><br><span style='font-size: 20px; color: black;'>" + result.innerHTML + "</span>";
 
     // Hide the questions and previous buttons and show the first question
     for (var i = 2; i <= 13; i++) {
@@ -307,6 +344,21 @@
   <h1 class="neon">Mind Matters<br>Stress Online Test</h1>
 </div>
   <h>Please answer the following questions to determine your stress level:</h>
+    <div class="introduction">
+      <p>Welcome to the Mind Matters Stress Online Test. <br><br>This stress level test is NOT meant to be used as a diagnostic tool.
+
+        <br><br>Based on your answers to the questions, you’ll receive a result that gives you an idea of how stressed you are. But the results won’t tell you whether your health is at risk from the stress you’re experiencing.
+        
+        If you are concerned about your stress levels, physical symptoms of stress, consider seeking help from a trained medical professional, such as a doctor or mental health professional.
+
+        <br><br>Mind Matters believes assessments can be a valuable first step toward getting treatment. All too often people stop short of seeking help out of fear their concerns aren't legitimate or severe enough to warrant professional intervention.
+      
+       <br><br> Please answer all the questions truthfully. </p>
+      <button type="button" class="submit-button" onclick="startTest()">Start Test</button>
+    </div>
+    <div class="container">
+    <form id="questions-form" style="display:none">
+
   <form>
     <div id="q1" >
       <img src="image2.gif" class="image" alt="overwhelmed">
@@ -467,7 +519,7 @@
       <img src="image14.gif" class="image" alt="suicide">
       <p>13. Have you ever thought about suicide?</p>
       <input type="radio" name="q13" value="0"> No<br>
-      <input type="radio" name="q13" value="1"> Yes<br>
+      <input type="radio" name="q13" value="4"> Yes<br>
       <div class="button-container">
       <button type="button" class="prev-btn"onclick="prevQuestion()">Previous</button>
       <button type="button" class="next-btn" onclick="nextQuestion();">Next</button>
