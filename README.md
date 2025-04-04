@@ -11,8 +11,10 @@ Chinese: https://pyuan57.github.io/chineseVersion-stresstest/
 ## Screenshots
 English Version:
 ![English](https://github.com/user-attachments/assets/e1c8b7cb-b87b-4197-b57f-8ed014a22871)
-
+Malay Version:
+![Malay](https://github.com/user-attachments/assets/f50dac3b-6398-4625-9a7d-bc838d4540d8)
+Chinese Version:
+![chinese](https://github.com/user-attachments/assets/e3376f9b-f3c0-42df-ab50-50cae14af28a)
 
 ## Authors
-
 - [@Pyuan57](https://www.github.com/Pyuan57)
