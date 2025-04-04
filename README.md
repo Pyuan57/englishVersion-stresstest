@@ -9,7 +9,7 @@ Malay: https://pyuan57.github.io/malayVersion-stresstest/
 Chinese: https://pyuan57.github.io/chineseVersion-stresstest/ 
 
 ## Screenshots
-
+English Version:
 ![English](https://github.com/user-attachments/assets/e1c8b7cb-b87b-4197-b57f-8ed014a22871)
 
 
