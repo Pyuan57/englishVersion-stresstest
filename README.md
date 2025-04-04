@@ -7,3 +7,7 @@ I provide three types of stress test languages:
 English: https://pyuan57.github.io/englishVersion-stresstest/
 Malay: https://pyuan57.github.io/malayVersion-stresstest/ 
 Chinese: https://pyuan57.github.io/chineseVersion-stresstest/ 
+
+## Authors
+
+- [@Pyuan57](https://www.github.com/Pyuan57)
