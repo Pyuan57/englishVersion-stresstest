@@ -8,6 +8,11 @@ English: https://pyuan57.github.io/englishVersion-stresstest/
 Malay: https://pyuan57.github.io/malayVersion-stresstest/ 
 Chinese: https://pyuan57.github.io/chineseVersion-stresstest/ 
 
+## Screenshots
+
+![English](https://github.com/user-attachments/assets/e1c8b7cb-b87b-4197-b57f-8ed014a22871)
+
+
 ## Authors
 
 - [@Pyuan57](https://www.github.com/Pyuan57)
